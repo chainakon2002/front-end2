@@ -1,92 +1,105 @@
 import axios from 'axios'
 import {useState} from "react";
 
-export default function RegisterForm() {
+export default function adminproduct() {
   const [input, setInput] = useState({
-    username : '', 
-    password : '',
-    confirmPassword : '',
-    email : ''
+    ItemName : '', 
+    price : '',
+    description : '',
+    restaurantsId : '',
+    file : '',
   })
 
   const hdlChange = e => {
     setInput( prv => ( { ...prv, [e.target.name] : e.target.value } ) )
   }
+  
 
   const hdlSubmit = async e => {
     try {
       e.preventDefault()
-      // validation
-      if(input.password !== input.confirmPassword) {
-        return alert('Please check confirm password')
-      }
-      const rs = await axios.post('http://localhost:8889/auth/register', input)
+
+      const rs = await axios.post('http://localhost:8889/auth/menutems', input)
       console.log(rs)
       if(rs.status === 200) {
-        alert('Register Successful')
+        alert('เพิ่มข้อมูลเรียบร้อย')
       }
     }catch(err) {
       console.log( err.message)
     }
 
   }
-
   return (
     <div className="flex flex-col items-center ">
       <div className="text-3xl mb-5"></div>
       <form className="flex h-[calc(100vh-95px)] flex-col justify-center items-center outline-none border-10 w-[30rem] h-[30rem] rounded-lg shadow-md  mt-20 transition duration-500 ease-in-out transform" onSubmit={hdlSubmit}>
-      <p className=" font-semibold text-base text-[#5473E3] text-center ">Register</p>
+      <p className=" font-semibold text-base text-[#5473E3] text-center ">เพิ่มสินค้า</p>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">username</span>
+            <span className="label-text">ชื่อสินค้า</span>
           </div>
           <input
             type="text"
             className="input input-bordered w-full max-w-xs"
-            name="username"
-            value={input.username}
+            name="ItemName"
+            value={input.ItemName}
             onChange={ hdlChange }
           />
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">E-mail</span>
+            <span className="label-text">ราคา</span>
           </div>
           <input
-            type="email"
+            type="int"
             className="input input-bordered w-full max-w-xs"
-            name="email"
-            value={input.email}
+            name="price"
+            value={input.price}
             onChange={ hdlChange }
           />
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">password</span>
+            <span className="label-text">รายละเอียด</span>
           </div>
           <input
-            type="password"
+            type="text"
             className="input input-bordered w-full max-w-xs"
-            name="password"
-            value={ input.password }
+            name="description"
+            value={ input.description }
             onChange={ hdlChange }
           />
+
+</label>
+        <label className="form-control w-full max-w-xs">
+          <div className="label">
+            <span className="label-text">2222</span>
+          </div>
+          <input
+            type="String"
+            className="input input-bordered w-full max-w-xs"
+            name="restaurantsId"
+            value={ input.restaurantsId }
+            onChange={ hdlChange }
+          />
+
+
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">Confirm Password</span>
+            <span className="label-text">รูปภาพ</span>
           </div>
           <input
-            type="password"
+            type=" text"
             className="input input-bordered w-full max-w-xs"
-            name="confirmPassword"
-            value={input.confirmPassword}
+            name="file"
+            value={input.file}
             onChange={ hdlChange }
           />
         </label>
         <div className="flex gap-5 ">
           <button type="submit" className="btn btn-outline btn-info mt-7">Submit</button>
-          <button type="reset" className="btn btn-outline btn-warning mt-7">Reset</button>
+         
         </div>
       </form>
     </div>
