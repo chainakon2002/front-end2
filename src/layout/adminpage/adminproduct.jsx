@@ -1,7 +1,12 @@
 import axios from 'axios'
 import {useState} from "react";
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export default function adminproduct() {
+
+  const navigate = useNavigate()
+
   const [input, setInput] = useState({
     ItemName : '', 
     price : '',
@@ -19,10 +24,27 @@ export default function adminproduct() {
     try {
       e.preventDefault()
 
-      const rs = await axios.post('http://localhost:8889/auth/menutems', input)
+      const rs = await axios.post('http://localhost:8889/auth/product', input)
       console.log(rs)
       if(rs.status === 200) {
-        alert('เพิ่มข้อมูลเรียบร้อย')
+        Swal.fire({
+          title: "เพิ่มข้อมูลเรียบร้อย",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+        });
+        navigate('/home')
       }
     }catch(err) {
       console.log( err.message)

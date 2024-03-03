@@ -6,6 +6,7 @@ export default function Promote(){
   <div className="mt-auto">
     <p className="text-[50px] font-semibold text-center">Windows 11 Pro </p>
     <p className="font-semibold text-lg">ลด 60% ถึง 29 กุมภาพันธ์</p>
+    <br />
     <img src="/src/assets/Banner.png" alt="" className="rounded-3xl" />
   </div>
 </div>

@@ -6,11 +6,13 @@ import Header from '../layout/Header'
 import UserHome from '../layout/UserHome'
 import NewTodoForm from '../layout/NewTodoForm'
 import Cart from '../layout/cart'
-import product from '../layout/product/product'
+
 import ProductDetail from '../layout/OrderDate/getProductById'; // เพิ่ม import
+import Payment from '../layout/pay/Payment';
 import Admin from '../layout/adminpage/adminhome'
 import Adminproduct from '../layout/adminpage/adminproduct'
 import Adminorder from '../layout/adminpage/adminorder'
+import Productpict from '../layout/Productpict'
 const guestRouter = createBrowserRouter([
   {
     path: '/',
@@ -37,7 +39,9 @@ const userRouter = createBrowserRouter([
       { path: '/new', element: <NewTodoForm />},
       { path: '/cart', element: <Cart />},
       { path: '/new', element: <product /> },
-      { path: '/product/:id', element: <ProductDetail /> } 
+      { path: '/product/:id', element: <ProductDetail /> },
+      { path: '/payment/:id/Fs2224SbaRel2Ncvn123444Bncceddd101Mx12Z01', element: <Payment/> },
+      { path: '/product01/', element: <Productpict /> }
 
     ]
   }

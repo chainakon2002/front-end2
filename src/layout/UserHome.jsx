@@ -86,23 +86,23 @@ import { Link } from 'react-router-dom'; // นำเข้า Link จาก re
 
 
 export default function UserHome() {
-  const [menutems, setMenutems] = useState([]); // ปรับเปลี่ยนตัวแปร products เป็น menutems
+  const [product, setproduct] = useState([]); 
 
   useEffect(() => {
-    const fetchMenutems = async () => { // ปรับเปลี่ยนชื่อฟังก์ชันเป็น fetchMenutems
+    const fetchproduct = async () => { // ปรับเปลี่ยนชื่อฟังก์ชันเป็น fetch
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8889/auth/getmenutems', {
+        const response = await axios.get('http://localhost:8889/auth/getproduct', {
           headers: { Authorization: `Bearer ${token}` } 
         });
         
-        setMenutems(response.data);
+        setproduct(response.data);
       } catch (error) {
-        console.error('Error fetching menutems:', error);
+        console.error('Error fetching product:', error);
       }
     };
 
-    fetchMenutems();
+    fetchproduct();
   }, []); 
 
   return (
@@ -111,21 +111,24 @@ export default function UserHome() {
       <div className='poster'>
       <Promote />
       {/* <img src="/src/assets/c9txfl (1).png" alt="" className="" /> */}
-      
+    
+    <h3 className ="productfi" >รายการสินค้า</h3>
+
       {/* <Proster/> */}
       </div>
-      {menutems.map((item) => (
-        <div key={item.id} className="product-item">
+
+  
+      {product.map((item) => (
+        <div key={item.id} className="product-item flex justify-center">
            <Link to={`/product/${item.id}`}>
           <img src={item.file} alt="" />
-          {/* <p className='product-file'>{mm}</p> */}
           <hr />
+          
           <h3 className=" font-semibold product-title">{item.ItemName}</h3>
-          {/* <p className="product-description">{item.description}</p> */}
+          
           <p className="font-semibold product-price">ราคา: {item.price}</p>
-          {/* <p className="product-stock">Stock: {item.stock}</p> */}
+    
           </Link>
-          {/* <p className="product-category">Category ID: {item.restaurantsId}</p> */}
           <div className="button-group">
           </div>
         </div>

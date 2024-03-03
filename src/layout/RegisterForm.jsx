@@ -1,13 +1,19 @@
 import axios from 'axios'
 import {useState} from "react";
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterForm() {
+
+  const navigate = useNavigate()
+
   const [input, setInput] = useState({
     username : '', 
     password : '',
     confirmPassword : '',
     email : ''
   })
+
 
   const hdlChange = e => {
     setInput( prv => ( { ...prv, [e.target.name] : e.target.value } ) )
@@ -23,11 +29,30 @@ export default function RegisterForm() {
       const rs = await axios.post('http://localhost:8889/auth/register', input)
       console.log(rs)
       if(rs.status === 200) {
-        alert('Register Successful')
+        Swal.fire({
+          title: "สมัครสมาชิกเรียบร้อย",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `
+          }
+        });
+        navigate('/')
+
       }
     }catch(err) {
       console.log( err.message)
     }
+
 
   }
 

@@ -50,8 +50,10 @@ export default function ProductDetail() {
     
 
     <button className='btn-hover color-9' onClick={handleOrder}>Add To Cart</button>
-
-    <button className='button2' onClick={handleOrder}>ซื้อเลย</button>
+    <Link to={`/payment/${product.id}/Fs2224SbaRel2Ncvn123444Bncceddd101Mx12Z01`}>
+    <button className='button2'>ซื้อเลย</button>
+        </Link>
+    
     </div>
     </div>
     

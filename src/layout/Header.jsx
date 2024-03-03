@@ -10,6 +10,7 @@ const guestNav = [
 const userNav = [
   { to: '/', text: 'Home' },
   { to: '/cart', text: 'cart' },
+  { to: '/product01', text: 'purchase order'}
 ]
 
 const adminNav = [

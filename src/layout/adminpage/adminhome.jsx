@@ -89,6 +89,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function AdminHome() {
   const [menuItems, setMenuItems] = useState([]);
@@ -97,7 +98,7 @@ export default function AdminHome() {
     const fetchMenuItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:8889/auth/getmenutems', {
+        const response = await axios.get('http://localhost:8889/auth/getproduct', {
           headers: { Authorization: `Bearer ${token}` } 
         });
         setMenuItems(response.data);
@@ -116,7 +117,23 @@ export default function AdminHome() {
         headers: { Authorization: `Bearer ${token}` } 
       });
       setMenuItems(menuItems.filter(item => item.id !== id));
-      alert("ลบสินค้าแล้ว");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        }
+      });
     } catch (error) {
       console.error('Error deleting menu item:', error);
     }

@@ -6,7 +6,11 @@ function App() {
 
   if(loading) {
     return (
-      <p className="text-4xl text-primary">Loading..</p>
+      
+        <span class="inline-block loading loading-dots text-4xl"></span>
+        
+      
+
     )
   }
 
