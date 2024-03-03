@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './payment.css'
+// import './payment.css'
+import Swal from 'sweetalert2';
 
-
+const navigate = useNavigate()
 const PaymentForm = () => {
   const { id } = useParams(); 
   const [formData, setFormData] = useState({
@@ -72,76 +73,96 @@ const PaymentForm = () => {
       });
       setFormData(response1.data);
       console.log('Payment successful:', response1.data);
+  
+      // แสดงการแจ้งเตือนเมื่อสั่งซื้อเสร็จสิ้น
+      Swal.fire({
+        title: "สั่งซื้อแล้ว",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
+      navigate('/product01')
     } catch (error) {
       console.error('Error processing payment:', error);
       setErrorMessage('An error occurred while processing payment. Please try again later.');
     }
   };
-  
 
   return (
-    <div className='payment'>
-      <div className="paymentMethods">
-        <label>เลือกวิธีการชำระเงิน:</label>
-        <p>{user.username}</p>
-        <div>
-          <input type="radio" id="COD" name="paymentMethod" className="radio theme-controller"value="COD" onChange={handleChange} />
-          <label for="COD">ปลายทาง</label>
-          <img src="/src/assets/cod.jpg" alt="COD" />
-        </div>
-       
+<div className="flex justify-center">
+  <div className="w-full max-w-lg">
+    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <div className="mb-6">
+        
+        
+        <img src="/src/assets/cod.jpg" alt="COD" className="w-24 mx-auto mt-2" />
       </div>
-  
-      <div className='paymentfrom'>
-        <h2>Payment Form</h2>
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        <form onSubmit={handleSubmit}>
-          <div className="cen">
-            <br /><br />
-            <img src={product.file} alt="" />
-          </div>
-          <div className="manu">
-            <label htmlFor="productId">ชื่อเมนู :<strong> {product.ItemName }</strong>  MenuID:     </label>
-            <input type="text" id="productId" name="productId" value={formData.productId = product.id} onChange={handleChange} readOnly />
-          </div>
-          <br />
-          <br />
-          <div>
-          <label >Product : </label>
-          <input type="text" id="productname" name="productname" value={formData.productname = product.ItemName} onChange={handleChange}  />
-          </div>
-          <hr />
-          <br />
-          <div className="amounnts">
-            <div className="amount1">
-              <label htmlFor="amount">Amount:  </label>
-              <input type="number" id="amount" name="amount" value={formData.amount} onChange={handleChange} min="1" max="5" />
-              <p>{formData.productname}</p>
-            </div>
-            <div className="amount2">
-              <p>ราคารวม: {product.price * formData.amount}</p>
-            </div>
-            <div className="prices">
-              <label htmlFor="price">price</label>
-              <input type="text" name='price' id='price' value={formData.price = product.price * formData.amount } onChange={handleChange} readOnly/>
-            </div>
 
-          </div>
-          <br /><br />
-          <div className="userIds">
-            <label htmlFor="userId">User ID:   </label>
-            <input type="text" id="userId" name="userId" value={formData.userId = user.id} onChange={handleChange} readOnly/>
-          </div>
-          <div className="usernames">
-              <label htmlFor="username">name: </label>
-              <input type="text" name='username' id='username' value={formData.username = user.username} onChange={handleChange} readOnly/>
-            </div>
-          <div className="button">
-            <button type="submit" className="btn btn-outline btn-success">Pay Now</button>
-          </div>
-        </form>
-      </div>
+      <h2 className="text-center text-xl mb-4"><strong> {product.ItemName}</strong></h2>
+      {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
+
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <img src={product.file} alt="" className="mx-auto" />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="productId"><strong> {product.ItemName}</strong> ID:</label>
+          <input type="text" id="productId" name="productId" value={formData.productId = product.id} onChange={handleChange} readOnly className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="productname">Product :</label>
+          <input type="text" id="productname" name="productname" value={formData.productname = product.ItemName} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+
+        <hr className="my-4" />
+
+        <div className="mb-4">
+          <label htmlFor="amount">Amount:</label>
+          <input type="number" id="amount" name="amount" value={formData.amount} onChange={handleChange} min="1" max="5" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+          {/* <p>{formData.productname}</p> */}
+        </div>
+
+        <div className="mb-4">
+          <p>ราคารวม: {product.price * formData.amount}</p>
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="price">price</label>
+          <input type="text" name="price" id="price" value={formData.price = product.price * formData.amount} onChange={handleChange} readOnly className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="userId">User ID:</label>
+          <input type="text" id="userId" name="userId" value={formData.userId = user.id} onChange={handleChange} readOnly className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+
+        <div className="mb-6">
+          <label htmlFor="username">name:</label>
+          <input type="text" name="username" id="username" value={formData.username = user.username} onChange={handleChange} readOnly className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+
+        <div className="flex justify-center">
+          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">สั่งซื้อ</button>
+        </div>
+      </form>
     </div>
+  </div>
+</div>
+
+
   );
   
   }

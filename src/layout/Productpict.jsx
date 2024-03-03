@@ -25,29 +25,29 @@ const Productpict = () => {
     
   
     return (
-<div className='"flex flex-col justify-center items-center py-10'>
-  <h2 className="text-2xl font-semibold mb-4">ข้อมูลการซื้อสินค้า</h2>
-  <div className="container mx-auto mt-10 p-4 rounded-lg">
-    {orderuser.map(orderusers => (
-      
-      <div key={orderusers.id} className="border-b border-gray-200 py-4">
-        <div className="flex items-center justify-between border-b border-gray-200 pb-9 mb-2">
-          <div>
-          <p className="text-lg font-semibold">ชื่อ : {orderusers.productname}</p>
-        <p className="text-gray-600">ราคา: {orderusers.price}</p>
-        <p className="text-gray-600">จำนวน: {orderusers.amount}</p>
-        
-          </div>
-       
-       <div>
-        <button className='bg-red-500 text-white px-4 py-2 rounded-md' onClick={() => handleDelete(purchase.id)} >ยกเลิก</button>
-       </div>
-        </div>
+<div className="flex flex-col justify-center items-center py-10">
+  <div className="mb-6">
+    <p className="text-4xl font-semibold text-center">รายการสั่งซื้อ</p>
+  </div>
 
+  <div className="container mx-auto mt-10 p-4 rounded-lg bg-white shadow-lg">
+    {orderuser.map(orderusers => (
+      <div key={orderusers.id} className="border-b border-gray-200 py-4">
+        <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-4">
+          <div>
+            <p className="text-lg font-semibold"> {orderusers.productname}</p>
+            <p className="text-gray-600">ราคา: {orderusers.price}</p>
+            <p className="text-gray-600">จำนวน: {orderusers.amount}</p>
+          </div>
+          <div>
+            <button className="bg-red-500 text-white px-4 py-2 rounded-xl" onClick={() => handleDelete(orderusers.id)}>ยกเลิก</button>
+          </div>
+        </div>
       </div>
     ))}
+  </div>
 </div>
-</div>
+
   );
     
 }

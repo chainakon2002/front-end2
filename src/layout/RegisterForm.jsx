@@ -111,7 +111,7 @@ export default function RegisterForm() {
         </label>
         <div className="flex gap-5 ">
           <button type="submit" className="btn btn-outline btn-info mt-7">Submit</button>
-          <button type="reset" className="btn btn-outline btn-warning mt-7">Reset</button>
+          
         </div>
       </form>
     </div>

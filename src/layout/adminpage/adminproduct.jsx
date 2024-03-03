@@ -95,7 +95,7 @@ export default function adminproduct() {
 </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">2222</span>
+            <span className="label-text">id ร้าน</span>
           </div>
           <input
             type="String"
@@ -109,7 +109,7 @@ export default function adminproduct() {
         </label>
         <label className="form-control w-full max-w-xs">
           <div className="label">
-            <span className="label-text">รูปภาพ</span>
+            <span className="label-text">ตำแหน่งรูปภาพ</span>
           </div>
           <input
             type=" text"
