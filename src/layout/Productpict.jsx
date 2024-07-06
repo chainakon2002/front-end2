@@ -36,11 +36,12 @@ const Productpict = () => {
         <div className="flex items-center justify-between border-b border-gray-200 pb-4 mb-4">
           <div>
             <p className="text-lg font-semibold"> {orderusers.productname}</p>
-            <p className="text-gray-600">ราคา: {orderusers.price}</p>
-            <p className="text-gray-600">จำนวน: {orderusers.amount}</p>
+            <p className="text-gray-600">จำนวน: {orderusers.amount} ชิ้น</p>
+            <p className="text-gray-600">ราคา: {orderusers.price} บาท</p>
+            
           </div>
           <div>
-            <button className="bg-red-500 text-white px-4 py-2 rounded-xl" onClick={() => handleDelete(orderusers.id)}>ยกเลิก</button>
+            {/* <button className="bg-red-500 text-white px-4 py-2 rounded-xl" onClick={() => handleDelete(orderusers.id)}>ยกเลิก</button> */}
           </div>
         </div>
       </div>

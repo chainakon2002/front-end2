@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams,useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 // import './payment.css'
 import Swal from 'sweetalert2';
 
-const navigate = useNavigate()
+
 const PaymentForm = () => {
   const { id } = useParams(); 
   const [formData, setFormData] = useState({
@@ -92,7 +92,7 @@ const PaymentForm = () => {
           `
         }
       });
-      navigate('/product01')
+
     } catch (error) {
       console.error('Error processing payment:', error);
       setErrorMessage('An error occurred while processing payment. Please try again later.');

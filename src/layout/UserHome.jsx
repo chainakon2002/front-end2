@@ -126,7 +126,7 @@ export default function UserHome() {
           
           <h3 className=" font-semibold product-title">{item.ItemName}</h3>
           
-          <p className="font-semibold product-price">ราคา: {item.price}</p>
+          <p className="font-semibold product-price">ราคา: {item.price} บาท</p>
     
           </Link>
           <div className="button-group">
